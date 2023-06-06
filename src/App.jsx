@@ -1,9 +1,18 @@
 import { Route, Routes } from "react-router";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import FilterTasks from "./components/FilterTasks";
 import TaskList from "./components/TaskList";
+import { fetchTodos } from "./store/actions/fetchTodos";
 
 function App() {
+  const todos = useSelector((state) => state.todos);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchTodos());
+  }, [dispatch]);
+
   return (
     <>
       <div className='m-auto text-center my-4'>
@@ -19,8 +28,8 @@ function App() {
         </Link>
       </div>
       <Routes>
-        <Route path='/' element={<TaskList />} />
-        <Route path='/filter' element={<FilterTasks />} />
+        <Route path='/' element={<TaskList todos={todos} />} />
+        <Route path='/filter' element={<FilterTasks todos={todos} />} />
       </Routes>
     </>
   );

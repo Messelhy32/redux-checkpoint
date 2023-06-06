@@ -19,11 +19,21 @@ const todoSlice = createSlice({
     AddTodo: function (state, action) {
       state.todos.unshift(action.payload);
     },
+    EditTodo: function (state, action) {
+      state.todos = state.todos.map((todo) => {
+        if (todo.id == action.payload.task.id) {
+          todo.title = action.payload.title;
+          return todo;
+        }
+        return todo;
+      });
+      console.log(state.todos);
+    },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchTodos.pending, (state, action) => {
-        console.log(action.meta.requestStatus);
+        action.meta.requestStatus;
       })
       .addCase(fetchTodos.fulfilled, (state, action) => {
         state.todos = action.payload;
@@ -35,4 +45,4 @@ const todoSlice = createSlice({
 });
 
 export default todoSlice.reducer;
-export const { DoneTodo, AddTodo } = todoSlice.actions;
+export const { DoneTodo, AddTodo, EditTodo } = todoSlice.actions;

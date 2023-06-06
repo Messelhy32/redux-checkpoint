@@ -1,23 +1,15 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchTodos } from "../store/actions/fetchTodos";
+/* eslint-disable react/prop-types */
 import AddTask from "./AddTask";
 import Task from "./Task";
 
-function TaskList() {
-  const todos = useSelector((state) => state.todos);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchTodos());
-  }, [dispatch]);
-
+function TaskList({ todos }) {
   return (
     <>
       <AddTask todos={todos} />
       <ul>
         {todos.map((todo, i) => {
           return (
-            <div key={i} className='flex justify-between w-7/12 m-auto my-10'>
+            <div key={i} className='text-center w-7/12 m-auto my-10'>
               <Task todo={todo} key={todo.id} />
             </div>
           );

@@ -1,16 +1,9 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchTodos } from "../store/actions/fetchTodos";
+/* eslint-disable react/prop-types */
+import { useState } from "react";
 import Task from "./Task";
 
-function FilterTasks() {
+function FilterTasks({ todos }) {
   const [isDone, setIsDone] = useState(false); // Fix: Correct usage of useState hook
-  const todos = useSelector((state) => state.todos);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchTodos());
-  }, [dispatch]);
-
   const NotDoneList = todos.filter((task) => task.completed === false);
   const DoneList = todos.filter((task) => task.completed === true);
 

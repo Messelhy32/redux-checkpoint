@@ -8,13 +8,11 @@ function AddTask({ todos }) {
   const initialValues = {
     id: "",
     title: "",
-    description: "",
     completed: false,
   };
   const validationSchema = Yup.object().shape({
     id: Yup.number(),
     title: Yup.string().required("Title is required"),
-    description: Yup.string().required("Description is required"),
     completed: Yup.bool(),
   });
   const handleSubmit = (values, { resetForm }) => {
@@ -38,21 +36,6 @@ function AddTask({ todos }) {
             <Field id='title' name='title' className='border mr-2' />
             {errors.title && touched.title && (
               <span className='text-red-600 font-semibold'>{errors.title}</span>
-            )}
-          </div>
-          <div className='mb-4'>
-            <label htmlFor='description' className='mr-2'>
-              Description
-            </label>
-            <Field
-              id='description'
-              name='description'
-              className='border mr-2'
-            />
-            {errors.description && touched.description && (
-              <span className='text-red-600 font-semibold'>
-                {errors.description}
-              </span>
             )}
           </div>
           <div className='mb-4'>
